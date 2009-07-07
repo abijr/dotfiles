@@ -1,0 +1,9 @@
+background no
+out_to_console yes
+update_interval 2.0
+total_run_times 0
+use_spacer none
+
+TEXT
+  :: ^fg(#A23E46)${cpu cpu1}%^fg(#A23E46)/^fg(#A23E46)${cpu cpu2}% ^fg()^i(/home/abijr/.icons/dzen/temp.xbm)^fg(#8B6914)${i8k_cpu_temp}c  ^fg()${freq_g 1}/${freq_g 2}GHz   ^i(/home/abijr/.icons/dzen/mem.xbm) $memperc%   ${if_empty ${exec awk '{print $2}' /proc/acpi/ac_adapter/AC/state | grep 'on-line'}}^i(/home/abijr/.icons/dzen/power-bat2.xbm)${else}^i(/home/abijr/.icons/dzen/power-ac.xbm)${endif}${exec hal-get-property --udi /org/freedesktop/Hal/devices/computer_power_supply_battery_BAT0 --key battery.charge_level.percentage}  ${if_empty ${}}^i(/home/abijr/.icons/dzen/net-wifi.xbm) ^fg(#99cc33)${downspeed eth0}k/s ^i(/home/abijr/.icons/dzen/down.xbm) ^fg(#ff3300)${upspeed eth0}k/s^i(/home/abijr/.icons/dzen/up.xbm)${else}^fg(#0066ff) ^i(/home/abijr/.icons/dzen/net-wifi.xbm) ^fg(#aaaaaa)^fg(#ffffff)^fg(#84AEE0)${downspeed wlan0}k/s ^i(/home/abijr/.icons/dzen/down.xbm) ^fg(#A23E46)${upspeed wlan0}k/s ^i(/home/abijr/.icons/dzen/up.xbm)${endif}  ^fg(#ffffff)${time %a %b %d %I:%M%P}
+
