@@ -1,7 +1,7 @@
 -- Abijr's config...
 -- happy hacking!
 --
--- Copied some stuff (dzen layout ) from and1's config and modded my own icons.
+-- Copied some stuff (dzen layout ) from and1's config and modded my own icons from someone else (cannot remember who, but if they're yours email me and i'll include you here...).
  
 import XMonad
 import System.Exit
