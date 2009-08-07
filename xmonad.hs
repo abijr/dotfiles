@@ -18,6 +18,7 @@ import XMonad.Layout.LayoutHints
 import XMonad.Layout.PerWorkspace
 import XMonad.ManageHook
 import XMonad.Util.Run
+import XMonad.Layout.Spacing
 
 import XMonad.Layout.TwoPane
 
@@ -67,7 +68,7 @@ myWorkspaces = ["all", "www", "code", "mcode"] ++ map show [5..9]
 -- Border colors for unfocused and focused windows, respectively.
 --
 myNormalBorderColor  = "#28241E"
-myFocusedBorderColor = "#1B1D34"
+myFocusedBorderColor = "#B47700"
  
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -78,7 +79,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
  
     -- launch dmenu
-    , ((modm,               xK_p     ), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
+    , ((modm,               xK_p     ), spawn "dmenuz")
  
     -- launch gmrun
     , ((modm .|. shiftMask, xK_p     ), spawn "urxvt -e ncmpcpp")
@@ -188,7 +189,7 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = tiled |||  Full ||| TwoPane (3/100) (1/2) 
+myLayout = spacing 2 $ tiled |||  Full ||| TwoPane (3/100) (1/2) ||| Mirror tiled
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
@@ -267,9 +268,10 @@ myDzenPP h = defaultPP
     , ppTitle = dzenColor ("" ++ myNormalFGColor ++ "") "" . wrap "< " " >"
     , ppLayout = wrap ("^bg()^fg(" ++ myBlue ++ ").| ") (" |.^fg()^bg()") . 
         (\x -> case x of
-        "Hinted Full" -> "^fg(" ++ myIconFGColor ++ ")^i(" ++ myIconDir ++ "/layout-full.xbm)"
-        "Hinted ResizableTall" -> "^fg(" ++ myIconFGColor ++ ")^i(" ++ myIconDir ++ "/layout-tall-right.xbm)"
-        "Hinted Mirror ResizableTall" -> "^fg(" ++ myIconFGColor ++ ")^i(" ++ myIconDir ++ "/layout-mirror-bottom.xbm)"
+        "Spacing 2 Tall" -> "Tall"
+        "Spacing 2 Full" -> "Full"
+        "Spacing 2 TwoPane" -> "2Pane"
+        "Spacing 2 Mirror Tall" -> "MTall" 
         _ -> x
         )
     , ppOutput = hPutStrLn h
