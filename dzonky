@@ -1,8 +1,0 @@
-#!/bin/sh
-
-FG='#aaaaaa'
-BG='#3F3F3F'
-FONT='-*-terminus-medium-*-*-*-12-*-*-*-*-*-*-*'
-
-conky | dzen2 -e '' -x '450' -h '14' -w '785' -ta r -fg $FG -bg $BG -fn -*-terminus-medium-*-*-*-12-*-*-*-*-*-*-*
-
