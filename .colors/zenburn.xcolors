@@ -1,0 +1,39 @@
+! Zenburn-Dark
+*background:  #282828
+*foreground:  #dcdccc
+*cursorColor: #688668
+
+!Black + Dark Grey
+*color0:      #000000
+*color8:      #4C4C4C
+
+!DarkRed + Red
+*color1:      #A82D33
+*color9:      #C51E2B
+
+
+!DarkGreen + Green
+*color2:      #688668
+*color10:     #579557
+
+!DarkYellow + Yellow
+*color3:      #dfaf8f
+*color11:     #c3bf9f
+
+
+!DarkBlue + Blue
+*color4:      #314D68
+*color12:     #585FA2
+
+!DarkMagenta + Magenta
+*color5:      #dc8cc3
+*color13:     #B965CC
+
+!DarkCyan + Cyan
+*color6:      #70ACAF
+*color14:     #93e0e3
+
+!LightGrey + White
+*color7:      #ACAAAA
+*color15:     #FFFFFF
+

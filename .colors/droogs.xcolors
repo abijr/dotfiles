@@ -1,0 +1,28 @@
+!droog
+*cursorColor: #688668
+*background: #171717
+*foreground: #e1e2db
+!black
+*color0: #232526
+*color8: #1e1e1e
+!red
+*color1: #933046
+*color9: #4b2935
+!green
+*color2: #74835E
+*color10: #394332
+!yellow
+*color3: #C9B464
+*color11: #D6993C
+!blue
+*color4: #3b5170
+*color12: #36416b
+!magenta
+*color5: #6B709C
+*color13: #474F73
+!cyan
+*color6: #4A6A76
+*color14: #40505D
+!white
+*color7: #E1E2DB
+*color15: #888888
