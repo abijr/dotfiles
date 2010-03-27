@@ -11,8 +11,7 @@ alias xterm='xterm -vb'
 # Git stuff 
 alias gita='git add'
 alias gito='git push origin master'
-gitc() { git commit -m '$@'; } 
- 
+alias gitc='git commit -m' 
  
 # Define something using google
 # Taken from brisbin's .bashrc
