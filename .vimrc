@@ -35,9 +35,20 @@ set sw=4
 " Set title
 set title
 let &titlestring = $CLEARCASE_ROOT
+ 
+"==================================================
+" GVIM stuff
+"==================================================
 
+set guioptions-=T 
+ 
+ 
+"==================================================
+ 
+ 
 "==================================================
 "PERL STUFF
+"==================================================
  
 " my perl includes pod
 let perl_include_pod = 1
@@ -57,9 +68,13 @@ set fdm=syntax
 noremap <M-j> gT
 noremap <M-k> gt
 
+inoremap <M-j> <Esc> gT
+inoremap <M-k> <Esc> gt
+ 
 " Mapping to make a new line without
 " switching to insert mode.
 nmap <C-o> o <Esc>
+ 
 " Mappings to go to next error in the code
 " [c & cpp plugin]
 map  <silent> <F7>    <Esc>:cp<CR>
@@ -67,7 +82,7 @@ map  <silent> <F8>    <Esc>:cn<CR>
 
 " Mapping to toggle the taglist window
 nnoremap <silent> <F10> :TlistToggle<CR>
- 
+
 " Mapping to toggle the NERDtree window
 nnoremap <silent> <F9> :NERDtreeTogle<CR>
  
@@ -89,8 +104,7 @@ set smartcase
 " keep the cursor position x rows from the end
 set so=3
 
-" Stuff for the Viki plugins
-filetype plugin indent on
+"Unsure, maybe set syntax highlighting on
 syntax on
 
 "Be able to increment with C-A alphanumeric values
