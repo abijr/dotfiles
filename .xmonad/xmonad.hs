@@ -1,7 +1,8 @@
--- Abijr's config...
+-- Abijr's config 
+-- xmonad.hs
+-- using xmonad darcs
 -- happy hacking!
 --
--- Copied some stuff (dzen layout ) from and1's config and modded my own icons from someone else (cannot remember who, but if they're yours email me and i'll include you here...).
  
 import XMonad
 import Data.Monoid
@@ -11,7 +12,6 @@ import System.IO
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
--- Stuff for mouse triggers on corners
 import XMonad.Hooks.ScreenCorners
 
 import XMonad.Hooks.FadeInactive
@@ -370,9 +370,9 @@ main = do
  
       -- key bindings
         keys               = myKeys,
-        mouseBindings      = myMouseBindings,
+        mouseBindings      = myMouseBindings
  
-      -- hooks, layouts
-        startupHook        = myStartupHook
+     -- hooks, layouts
+        , startupHook        = myStartupHook
     }
 

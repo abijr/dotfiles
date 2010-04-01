@@ -47,18 +47,7 @@ let perl_extended_vars = 1
 let perl_fold=1
 let perl_fold_blocks=1
 
-
-"===================================================
-"Haskell plugin stuff
-
-let g:haddock_browser = 'firefox'
-
-let g:haddock_docdir = '/usr/share/doc/ghc/html/'
-
-au BufEnter *.hs compiler ghc
- 
-"===================================================
- 
+"==================================================
   
 " Set folding to syntax
 set fdm=syntax
