@@ -3,7 +3,7 @@
 #############################
 
 alias ls='ls --color=auto'
-alias ll='ls | less'
+alias ll='ls --color | less'
 alias ..='cd ..'
 alias :q='exit'
 alias xterm='xterm -vb'
