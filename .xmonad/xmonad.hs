@@ -68,7 +68,7 @@ myModMask       = mod1Mask
 --
 -- A tagging example:
 --
-myWorkspaces = ["www", "code", "all", "docs"] ++ map show [5..9]
+myWorkspaces = ["www", "code", "docs", "all"] ++ map show [5..9]
 --
 --myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
  
@@ -324,9 +324,13 @@ myLogHook h = do
 -- per-workspace layout choices.
 --
 -- By default, do nothing.
+actions = [ ] ++
+          [ ("Move to " ++ tag, windows $ W.greedyView tag)
+                    | tag <- myWorkspaces ]
+
 myStartupHook = do
 	addScreenCorner SCLowerLeft (goToSelected defaultGSConfig )
-
+	addScreenCorner SCLowerRight (runSelectedAction defaultGSConfig actions)
 ------------------------------------------------------------------------
 -- 
   
