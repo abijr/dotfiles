@@ -9,6 +9,59 @@ Xft.antialias: true
 Xft.hinting:   1
 Xft.hintstyle: hintfull
 Xft.rgba:      none
+!-------------------------------------------------------------------------------
+!
+!
+! U R X V T
+!
+!
+!URxvt*font: -windows-proggycleansz-medium-r-normal--13-80-96-96-c-70-*-*
+!URxvt*boldFont: -windows-proggycleansz-medium-r-normal--13-80-96-96-c-70-*-*
+!URxvt*italicFont: -windows-proggycleansz-medium-r-normal--13-80-96-96-c-70-*-*
+!URxvt*boldItalicFont: -windows-proggycleansz-medium-r-normal--13-80-96-96-c-70-*-*
+ 
+!URxvt*font: -*-terminus-medium-r-*-*-14-140-*-*-*-*-*-*
+ 
+!URxvt*font: -*-terminus-medium-r-*-*-12-120-*-*-*-*-*-*
+!URxvt*boldFont: -*-terminus-medium-r-*-*-12-120-*-*-*-*-*-*
+!URxvt*italicFont: -*-terminus-medium-r-*-*-12-120-*-*-*-*-*-*
+!URxvt*boldItalicFont: -*-terminus-medium-r-*-*-12-120-*-*-*-*-*-*
+ 
+!URxvt*font: -*-lime-*-*-*-*-*-*-*-*-*-*-*-*
+ 
+!URxvt*font: -misc-fixed-medium-r-normal-*-10-*-*-*-*-*-*-*
+!URxvt*boldFont: -misc-fixed-medium-r-normal-*-10-*-*-*-*-*-*-*
+ 
+!URxvt*font: xft:MonteCarlo:pixelsize=12
+!URxvt*font: xft:Profont:size=8
+!URxvt*font: xft:DejaVu Sans Mono:bold:size=10
+!URxvt*boldFont: xft:DejaVu Sans Mono:bold:size=10
+!URxvt*font: xft:Envy Code R:pixelsize=11
+ 
+!URxvt*font: xft:Monaco:size=8.6
+!URxvt*font: xft:Monaco:size=7.5
+!URxvt*font: -*-lucidatypewriter-medium-*-*-*-12-*-*-*-*-*-*-*
+!!!!!!!!URxvt*font: xft:Envy Code R:size=10
+ 
+*font:      xft:Terminus:size=10
+URxvt*saveLines: 32767
+URxvt*scrollBar: false
+URxvt*scrollBar_right: true
+URxvt*loginShell: true
+URxvt*shading: 30
+URxvt*termName: rxvt-unicode
+URxvt*secondaryScroll: true
+URxvt*perl-lib: /usr/lib/urxvt/perl/
+URxvt*perl-ext-common: default,matcher,searchable-scrollback
+URxvt*urlLauncher: firefox
+URxvt*matcher.button: 1
+URxvt*cutchars: `"()'*<>[]{|}
+URxvt*visualBell: true
+URxvt*keysym.C-u: perl:matcher
+URxvt*urgentOnBell: true
+!urxvt*cursorColor: #b092a4
+!URxvt*cursorColor: #6dacd8
+!URxvt*inheritPixmap: true
 
 !
 !
