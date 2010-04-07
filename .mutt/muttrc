@@ -73,7 +73,7 @@ set my_title="mutt"
   set status_format       = "-%r- %v Folder: %f, Msgs: %m%?n? New: %n?%?d? Del: %d?%?t? Tag: %t?%?l? %l? /%?p? %p waiting to send /%>â”€"
 
 # composing mail
-  set askcc                                                       # ask for CC:
+# set askcc                                                       # ask for CC:
   set attribution         = "On %d, %n wrote:"                    # set the attribution
   set edit_headers                                                # show headers when composing
   set fast_reply                                                  # skip to compose when replying

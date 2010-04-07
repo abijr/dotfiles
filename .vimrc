@@ -40,7 +40,7 @@ let &titlestring = $CLEARCASE_ROOT
 " GVIM stuff
 "==================================================
 
-set guioptions-=T 
+set guioptions=m 
  
  
 "==================================================
@@ -62,6 +62,18 @@ let perl_fold_blocks=1
   
 " Set folding to syntax
 set fdm=syntax
+ 
+" sane movement with wrap turned on
+nnoremap j gj
+nnoremap k gk
+vnoremap j gj
+vnoremap k gk
+nnoremap <Down> gj
+nnoremap <Up> gk
+vnoremap <Down> gj
+vnoremap <Up> gk
+inoremap <Down> <C-o>gj
+inoremap <Up> <C-o>gk
 
 " These are mappings to move along 
 " tabs with the alt-key
@@ -84,7 +96,7 @@ map  <silent> <F8>    <Esc>:cn<CR>
 nnoremap <silent> <F10> :TlistToggle<CR>
 
 " Mapping to toggle the NERDtree window
-nnoremap <silent> <F9> :NERDtreeTogle<CR>
+nnoremap <silent> <F9> :NERDTreeToggle<CR>
  
 " These are mappings to copy and paste
 " to clipboard with F5 and F6
