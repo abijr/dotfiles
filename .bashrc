@@ -13,6 +13,13 @@ alias gita='git add'
 alias gito='git push origin master'
 alias gitc='git commit -m' 
  
+_isroot=false
+[ $UID -eq 0 ] && _isroot=true
+
+if ! $_isroot; then
+	alias pacman='sudo pacman' 
+fi
+
 # Define something using google
 # Taken from brisbin's .bashrc
 define() {
@@ -39,6 +46,8 @@ PS1='\033[0;;32m{ \033[0;;m\u \033[0;;32m} \033[0;1;31m:: \033[0;;m[ \h ] \033[0
 eval `dircolors -b`
 
 set -o vi
+ 
+ 
 
 # Exports
 export EDITOR="vim"

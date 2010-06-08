@@ -11,21 +11,22 @@
 # by adding "term screen-256color" to your .screenrc.
 #
 
+
 # general-doesn't-fit stuff
-color normal     color188 color234
+color normal     color255 color234
 color error      color115 color236
 color markers    color142 color238
 color tilde      color108 color237
 color status     color144 color232
 
 # index stuff
-color indicator  color108 color233
+color indicator  color108 color232
 color tree       color109 color235
-color index      color188 color233 ~A
-color index      color188 color233 ~N
-color index      color188 color233 ~O
-color index      color174 color233 ~F
-color index      color174 color233 ~D
+color index      color231 color233 ~A
+color index      color231 color233 ~N
+color index      color108 color233 ~O
+color index      color231 color233 ~F
+color index      color231 color233 ~D
 
 # header stuff
 color hdrdefault color223 color235

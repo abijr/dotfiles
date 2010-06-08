@@ -43,7 +43,7 @@ Xft.rgba:      none
 !URxvt*font: -*-lucidatypewriter-medium-*-*-*-12-*-*-*-*-*-*-*
 !!!!!!!!URxvt*font: xft:Envy Code R:size=10
  
-*font:      xft:Terminus:size=10
+URxvt*font:      xft:Terminus:size=10
 URxvt*saveLines: 32767
 URxvt*scrollBar: false
 URxvt*scrollBar_right: true
@@ -91,71 +91,13 @@ xterm*faceName:      Monospace:size=10
  
 !#include "/home/abijr/.colors/zenburn.xcolors"
 #include "/home/abijr/.colors/robby.xcolors"
+!#include "/home/abijr/.colors/shiva.xrdb"
 !#include "/home/abijr/.colors/gigamos.xcolors"
 !#include "/home/abijr/.colors/droogs.xcolors"
 !#include "/home/abijr/.colors/daisukes.xcolors"
-
-*background:  #262626
-*foreground:  #dcdccc
-*cursorColor: #688668
-
-!
-!	X L O C K
-!
 ! 
-XLock.mode:          fzort
-!XLock.mode:         atunnels
-!XLock.icongeometry: 256x256
-XLock.username:      User: 
-XLock.password:      Pass: 
-XLock.foreground:    White
-XLock.background:    Gray20
-XLock.description:   false
-XLock.echokeys:      true
-XLock.echokey:       *
-XLock.info:          
-!XLock.info:         Enter password to unlock \nSelect icon to lock
-XLock.validate:      Validating login...
-XLock.invalid:       Login failed
-XLock.font:          -xos4-terminus-*-*-*-*-*-*-*-*-*-*-*-*
-XLock.planfont:      -xos4-terminus-*-*-*-*-*-*-*-*-*-*-*-*
-XLock.messagefont:   -xos4-terminus-*-*-*-*-*-*-*-*-*-*-*-*
-XLock.ncolors:       256
-!XLock.dpmsstandby:  600
-!XLock.dpmssuspend:  1200
-!XLock.dpmsoff:      1800
 
 
-!-------------------------------------------------------------------------------
-!
-!	X M A N
-!
-!
-Xman*Background:            #3F3F3F
-Xman*Foreground:            #F0DFAF
-Xman*bothShown:             true
-Xman*topBox:                false
-Xman*manualFontNormal:      -xos4-terminus-*-*-*-*-*-*-*-*-*-*-iso8859-2
-Xman*manualFontBold:        -xos4-terminus-bold-*-*-*-*-*-*-*-*-*-iso8859-2
-Xman*manualFontItalic:      -xos4-terminus-*-*-*-*-*-*-*-*-*-*-iso8859-2
-Xman*directoryFontNormal:   -xos4-terminus-*-*-*-*-*-*-*-*-*-*-iso8859-2
-
-
-!-------------------------------------------------------------------------------
-!
-!	X C L O C K
-!
-!
-xclock*update:     1
-xclock*Mode:       analog
-xclock*Background: #3F3F3F
-xclock*Border:     #3F3F3F
-xclock*Foreground: #F0DFAF
-xclock*geometry:   120x120+1160+15
-
-
-!-------------------------------------------------------------------------------
-!
 !
 !      X C L I P B O A R D
 !

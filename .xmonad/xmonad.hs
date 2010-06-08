@@ -251,10 +251,8 @@ myManageHook = composeAll .concat $
     [ [className =? "MPlayer"        --> doFloat]
     , [className =? "Gimp"           --> doFloat]
     , [fmap ("VLC" `isInfixOf`) title    --> doFloat]
-    , [fmap ("firefox" `isInfixOf`) title    --> doShift "www"]
-    , [resource  =? "desktop_window" --> doIgnore]
+    , [resource  =? "desktop_window" --> doFloat]
     , [resource  =? "conky" --> doIgnore]
-	, [title	 =? "Buddy List" 	 --> doShift "www" ]
     , [resource  =? "kdesktop"       --> doIgnore] 
 	]
  
@@ -330,7 +328,6 @@ actions = [ ] ++
 
 myStartupHook = do
 	addScreenCorner SCLowerLeft (goToSelected defaultGSConfig )
-	addScreenCorner SCLowerRight (runSelectedAction defaultGSConfig actions)
 ------------------------------------------------------------------------
 -- 
   

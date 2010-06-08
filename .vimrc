@@ -39,9 +39,10 @@ let &titlestring = $CLEARCASE_ROOT
 "==================================================
 " GVIM stuff
 "==================================================
-
-set guioptions=m 
  
+set guioptions+=LlRrb
+set guioptions-=LlRrb
+set guioptions-=T
  
 "==================================================
  
@@ -61,7 +62,7 @@ let perl_fold_blocks=1
 "==================================================
   
 " Set folding to syntax
-set fdm=syntax
+"set fdm=syntax
  
 " sane movement with wrap turned on
 nnoremap j gj
@@ -96,7 +97,7 @@ map  <silent> <F8>    <Esc>:cn<CR>
 nnoremap <silent> <F10> :TlistToggle<CR>
 
 " Mapping to toggle the NERDtree window
-nnoremap <silent> <F9> :NERDTreeToggle<CR>
+nnoremap <silent> <F8> :NERDTreeToggle<CR>
  
 " These are mappings to copy and paste
 " to clipboard with F5 and F6
@@ -118,6 +119,7 @@ set so=3
 
 "Unsure, maybe set syntax highlighting on
 syntax on
+filetype plugin on
 
 "Be able to increment with C-A alphanumeric values
 set nrformats=alpha

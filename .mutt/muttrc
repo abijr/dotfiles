@@ -12,7 +12,7 @@ set postponed=+drafts
 set mbox_type=Maildir
 set mailcap_path= ~/.mutt/mailcap
 
-mailboxes +inbox +tec +arch +perl +xmonad +mbox +sent +drafts
+mailboxes +inbox +tec +uacj +arch +perl +xmonad +mbox +sent +drafts
 
 
  ###

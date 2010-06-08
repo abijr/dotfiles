@@ -1,14 +1,15 @@
+*background: #262626
+*foreground:	#dcdccc
+*cursorColor:	#688668
 
-
-*cursorColor: #688668
 !black
-*color0: #0A0A0A
-*color8: #595959
+*color0: #000000
+*color8: #555753
 !red
 *color1: #7E2F28
 *color9: #934740
 !green
-*color2: #2B5F36
+*color2:  #355f36
 *color10: #3B7F4B
 !yellow
 *color3: #5A5015
@@ -20,8 +21,8 @@
 *color5: #4A2859	
 *color13: #A043AC
 !cyan
-*color6: #2B565C
+*color6: #2e5b65
 *color14: #63A1AA
 !white
-*color7: #9C9C9C
+*color7: #6F6F6F
 *color15: #ECECEC
