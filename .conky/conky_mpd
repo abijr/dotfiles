@@ -1,0 +1,53 @@
+# Use Xft?
+use_xft yes
+xftfont zekton:size=10
+
+# Update interval in seconds
+update_interval .5
+
+# This is the number of times Conky will update before quitting.
+# Set to zero to run forever.
+total_run_times 0
+
+# Create own window instead of using desktop (required in nautilus)
+
+own_window  yes
+own_window_transparent yes
+own_window_type desktop
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager 
+
+# Use double buffering (reduces flicker, may not work for everyone)
+double_buffer yes
+
+# Draw shades?
+draw_shades no
+
+# Draw outlines?
+draw_outline no
+
+# Draw borders around text
+
+# Stippled borders?
+stippled_borders 0
+
+# Default colors and also border colors
+default_color 000000
+ 
+# Gap between borders of screen and text
+# same thing as passing -x at command line
+gap_x 505
+gap_y 0
+
+# Subtract file system buffers from used memory?
+no_buffers yes
+
+# set to yes if you want all text to be in uppercase
+uppercase no
+
+alignment bottom_left
+ 
+minimum_size 148 20
+TEXT
+$alignc $mpd_title
+${font zekton:size=8} $alignc $mpd_artist
+$alignc ${mpd_bar 4,80 260000 FFFFFF}

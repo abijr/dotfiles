@@ -7,11 +7,16 @@ alias ll='ls --color | less'
 alias ..='cd ..'
 alias :q='exit'
 alias xterm='xterm -vb'
+alias todo='gvim ~/todo'
  
 # Git stuff 
 alias gita='git add'
 alias gito='git push origin master'
 alias gitc='git commit -m' 
+
+# Tell firefox to ignore gtk theme
+alias open='xdg-open'
+
  
 _isroot=false
 [ $UID -eq 0 ] && _isroot=true
@@ -56,3 +61,6 @@ export LC_ALL=en_US.utf8
 export BROWSER="firefox"
 export TERM=xterm-256color
 export MAIL=/home/abijr/Mail/inbox
+export GTK_IM_MODULE=scim
+export QT_IM_MODULE=scim
+export XMODIFIERS=@im=SCIM

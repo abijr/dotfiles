@@ -4,6 +4,9 @@ set nocompatible
 " set vim to use 256 colors
 set t_Co=256
 
+" set history size
+set history=100
+ 
 " switch to taglist right after opening it.
 let tlist_gainfocus_on_toggleopen = 1
 

@@ -8,7 +8,7 @@ import XMonad
 import Data.Monoid
 import System.Exit
 import System.IO
-  
+ 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
@@ -26,6 +26,7 @@ import XMonad.ManageHook
 import XMonad.Util.Run
 import XMonad.Layout.Spacing
 import XMonad.Actions.GridSelect
+import XMonad.Hooks.ManageHelpers
 
 import XMonad.Layout.TwoPane
 import XMonad.Layout.SimplestFloat
@@ -68,14 +69,14 @@ myModMask       = mod1Mask
 --
 -- A tagging example:
 --
-myWorkspaces = ["www", "code", "docs", "all"] ++ map show [5..9]
+myWorkspaces = ["www", "code", "docs", "all"] ++ map show [5..7]
 --
 --myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
  
 -- Border colors for unfocused and focused windows, respectively.
 --
-myNormalBorderColor  = "#28241E"
-myFocusedBorderColor = "#3C3C47"
+myNormalBorderColor  = "#242424"
+myFocusedBorderColor = "#FFFFFF"
  
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -92,7 +93,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 	, ((modm, 				xK_w	 ), spawn "thunar")
  
 	-- launch firefox
-	, ((modm .|. shiftMask,	xK_w	 ), spawn "firefox")
+	, ((modm .|. shiftMask,	xK_w	 ), spawn "ff")
  
 	-- launch firefox
 	, ((modm,				xK_e	 ), spawn "dmenucalc")
@@ -250,6 +251,7 @@ myLayout = spacing 3 $ tiled |||  Full ||| TwoPane (3/100) (1/2) ||| simplestFlo
 myManageHook = composeAll .concat $
     [ [className =? "MPlayer"        --> doFloat]
     , [className =? "Gimp"           --> doFloat]
+    , [className =? "Gimp-2.6"           --> doFloat]
     , [fmap ("VLC" `isInfixOf`) title    --> doFloat]
     , [resource  =? "desktop_window" --> doFloat]
     , [resource  =? "conky" --> doIgnore]
@@ -266,7 +268,7 @@ myFocusFollowsMouse = True
 -- Color, font and iconpath definitions:
 --
 myFont = "-xos4-terminus-medium-r-normal-*-14-*-*-*-c-*-iso10646-1"
-myIconDir = "/home/and1/.dzen"
+myIconDir = "/home/abijr/.dzen"
 myDzenFGColor = "#555555"
 myDzenBGColor = "#1A1C21"
 myNormalFGColor = "#aaaaaa"
@@ -286,6 +288,13 @@ myRed = "#9A2323"
 myYellow = "#D7CD93"
 --Status bar with dzen 
  
+--A function to delete output from dynamic log
+del :: String -> String
+del string = a
+	where
+		a = ""
+
+ 
 myDzenPP :: PP 
 myDzenPP = defaultPP
     { ppCurrent = wrap ("^bg(" ++ myGreen2 ++ ")^fg(" ++ myGreen ++ ")[^fg(" ++ myYellow ++ ")") ("^fg(" ++ myGreen ++ ")]^fg()^bg()") 
@@ -295,7 +304,7 @@ myDzenPP = defaultPP
     , ppUrgent = wrap ("^fg(" ++ myUrgentFGColor ++ ")^bg()^p()") "^fg()^bg()^p()" . \wsId -> if (':' `elem` wsId) then drop 2 wsId else wsId
     , ppSep = " "
     , ppWsSep = " "
-    , ppTitle = dzenColor ("" ++ myNormalFGColor ++ "") "" . wrap " " " "
+    , ppTitle = del
     , ppLayout = wrap ("^bg(" ++ myGreen2 ++ ")^fg(" ++ myYellow ++ ") ") (" ^fg()^bg()") . 
         (\x -> case x of
         "Spacing 3 Tall" -> "[ |:]"
@@ -305,14 +314,38 @@ myDzenPP = defaultPP
         _ -> x
         )
     }
+myDzenPP2 :: PP 
+myDzenPP2 = defaultPP
+    { ppCurrent = del
+    , ppVisible = del
+    , ppHidden = del
+    , ppHiddenNoWindows = del
+    , ppUrgent = del
+    , ppSep = " "
+    , ppWsSep = " "
+    , ppTitle = dzenColor ("" ++ myNormalFGColor ++ "") "" . wrap " " " "
+    , ppLayout = del
+    }
 
 ------------------------------------------------------------------------
+-- 
+fadeMostInactives :: Rational -> X ()
+fadeMostInactives = fadeOutLogHook . fadeIf (isUnfocused <&&> noneOf qs)
+  where noneOf = fmap not . foldr1 (<||>)
+        qs = [isFullscreen, fmap ("layer" `isInfixOf`) className, className =? "Cinelerra", className =? "Gimp",className =? "Gimp-2.6", className =? "WINWORD.EXE", className =? "Wine"]
+
+
 -- Log Hook
 --
 myLogHook :: Handle -> X ()
 myLogHook h = do 
 	dynamicLogWithPP myDzenPP { ppOutput = hPutStrLn h }
-	fadeInactiveLogHook 0xcccccccc
+	fadeMostInactives 0xcccccccc
+ 
+myLogHook2 :: Handle -> X ()
+myLogHook2 h = do 
+	dynamicLogWithPP myDzenPP2 { ppOutput = hPutStrLn h }
+
 
 ------------------------------------------------------------------------
 -- Startup hook
@@ -322,10 +355,6 @@ myLogHook h = do
 -- per-workspace layout choices.
 --
 -- By default, do nothing.
-actions = [ ] ++
-          [ ("Move to " ++ tag, windows $ W.greedyView tag)
-                    | tag <- myWorkspaces ]
-
 myStartupHook = do
 	addScreenCorner SCLowerLeft (goToSelected defaultGSConfig )
 ------------------------------------------------------------------------
@@ -339,10 +368,15 @@ myEventHook e = do
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
-		xmproc <- spawnPipe "dzen2 -e '' -x '0' -h '14' -w '500' -ta l -fg '#aaaaaa' -bg '#1a1c21' -fn -*-terminus-medium-*-*-*-12-*-*-*-*-*-*-*"
-		spawnPipe "dzonky"
+		xmproc <- spawnPipe "dzen2 -e '' -x '0' -y '780' -h '20' -w '350' -ta l -fg '#aaaaaa' -bg '#1a1c21' -fn -*-terminus-medium-*-*-*-19-*-*-*-*-*-*-*"
+		second <- spawnPipe "dzen2 -e '' -x '0' -y '760' -h '20' -w '350' -ta l -fg '#aaaaaa' -bg '#1a1c21' -fn -*-terminus-medium-*-*-*-18-*-*-*-*-*-*-*"
 		spawnPipe "xcompmgr"
-		spawnPipe "setbg" 
+		spawnPipe "conky -c ~/.conky/conky_clock"
+		spawnPipe "conky -c ~/.conky/conky_status"
+		spawnPipe "conky -c ~/.conky/conky_mpd"
+		spawnPipe "conky -c ~/.conky/conky_cal"
+		spawnPipe "conky -c ~/.conky/conky_todo"
+		spawnPipe "setbg"  -- Sets the background
 		xmonad $ defaultConfig
 			{
  
@@ -357,9 +391,11 @@ main = do
 		
     	manageHook = myManageHook <+> manageDocks
         , layoutHook = avoidStruts  $  myLayout
-        , logHook = myLogHook xmproc,
+        , logHook = do
+			myLogHook xmproc
+			myLogHook2 second
 
-        terminal           = myTerminal,
+        ,terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
         borderWidth        = myBorderWidth,
         modMask            = myModMask,
@@ -374,6 +410,6 @@ main = do
         mouseBindings      = myMouseBindings
  
      -- hooks, layouts
-        , startupHook        = myStartupHook
+        , startupHook      = myStartupHook
     }
 
