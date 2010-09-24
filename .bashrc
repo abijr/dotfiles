@@ -2,7 +2,7 @@
 # Author: abijr
 #############################
 
-alias ls='ls --color=auto'
+alias ls='ls --color=auto --group-directories-first'
 alias ll='ls --color | less'
 alias ..='cd ..'
 alias :q='exit'
@@ -23,6 +23,7 @@ _isroot=false
 
 if ! $_isroot; then
 	alias pacman='sudo pacman' 
+	alias cpac='sudo pacman-color' 
 fi
 
 # Define something using google
