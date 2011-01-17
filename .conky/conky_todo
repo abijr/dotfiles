@@ -47,7 +47,7 @@ uppercase no
 alignment bottom_left
  
 minimum_size 380 28
- 
+
 TEXT
 ${font vtks distress:size=30}TODO
-${tab 30,30}${font}${execi 60 cat ~/todo} 
+${font}${tail ~/todo 3}

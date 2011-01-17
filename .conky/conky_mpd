@@ -48,6 +48,6 @@ alignment bottom_left
  
 minimum_size 148 20
 TEXT
-$alignc $mpd_title
+$alignc ${mpd_title 25}
 ${font zekton:size=8} $alignc $mpd_artist
 $alignc ${mpd_bar 4,80 260000 FFFFFF}

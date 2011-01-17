@@ -35,7 +35,7 @@ default_color 000000
  
 # Gap between borders of screen and text
 # same thing as passing -x at command line
-gap_x 9
+gap_x 19
 gap_y -8
 
 # Subtract file system buffers from used memory?
@@ -46,7 +46,7 @@ uppercase no
 
 alignment bottom_right
  
-minimum_size 50 28
+minimum_size 90 28
 
 TEXT
-${time %I:%M}${font zekton:size=20}${time %p}
+$alignc${time %I:%M}${font zekton:size=20}${time %p}
