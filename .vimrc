@@ -5,10 +5,15 @@ set nocompatible
 set t_Co=256
 
 " set history size
-set history=100
+set history=150
+
+" set persistent undo and its dir
+set undofile
  
 " switch to taglist right after opening it.
-let tlist_gainfocus_on_toggleopen = 1
+let Tlist_GainFocus_On_ToggleOpen = 1
+let Tlist_Show_One_File = 1
+
 
 " USE THE ZENBURN COLOR SCHEME
 let g:zenburn_high_Contrast = 1
@@ -16,8 +21,8 @@ colorscheme zenburn
 
 "mouse
 set mouse=a
-
-" Open tag in new tab
+ 
+" Open tag in new tab with Ctrl-\
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
 " Make word before uppercase
@@ -120,9 +125,22 @@ set smartcase
 " keep the cursor position x rows from the end
 set so=3
 
-"Unsure, maybe set syntax highlighting on
+"Syntax and omnicompletion
 syntax on
 filetype plugin on
-
+filetype plugin indent on
+set ofu=syntaxcomplete#Complete
+ 
+" Setting for latex suite
+set grepprg=grep\ -nH\ $*
+let g:tex_flavor = "latex"
+let g:Tex_DefaultTargetFormat = "pdf"
+let g:Tex_CompileRule_pdf = "pdflatex $*"
+let g:Tex_ViewRule_pdf = "okular"
+ 
+" Settings for C/C++ 
+let g:C_OutputGvim = "xterm"
+let g:C_XtermDefaults = "-fn Monospace -fs 10"
+ 
 "Be able to increment with C-A alphanumeric values
 set nrformats=alpha
