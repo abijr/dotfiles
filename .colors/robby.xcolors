@@ -1,13 +1,13 @@
-*background: #262626
+*background: #141414
 *foreground:	#dcdccc
 *cursorColor:	#688668
 
 !black
 *color0: #000000
-*color8: #555753
+*color8: #505050
 !red
-*color1: #7E2F28
-*color9: #934740
+*color1: #9B261C
+*color9: #B3453C
 !green
 *color2:  #355f36
 *color10: #3B7F4B
