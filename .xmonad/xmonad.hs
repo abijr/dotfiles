@@ -28,9 +28,13 @@ import XMonad.Layout.Spacing
 import XMonad.Actions.GridSelect
 import XMonad.Hooks.ManageHelpers
 
-import XMonad.Layout.TwoPane
-import XMonad.Layout.SimplestFloat
 import XMonad.Util.EZConfig
+ 
+import XMonad.Util.Replace
+import XMonad.Util.Run
+
+import XMonad.Layout.ThreeColumns
+ 
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
@@ -69,7 +73,7 @@ myModMask       = mod1Mask
 --
 -- A tagging example:
 --
-myWorkspaces = ["www", "code", "docs", "all"] ++ map show [5..7]
+myWorkspaces = ["www", "code", "docs", "all", "gimp"] ++ map show [6..7]
 --
 --myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
  
@@ -93,7 +97,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 	, ((modm, 				xK_w	 ), spawn "thunar")
  
 	-- launch firefox
-	, ((modm .|. shiftMask,	xK_w	 ), spawn "ff")
+	, ((modm .|. shiftMask,	xK_w	 ), spawn "firefox")
  
 	-- launch firefox
 	, ((modm,				xK_e	 ), spawn "dmenucalc")
@@ -161,14 +165,15 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((0,               0x1008ff11), spawn "amixer -c 0 set Master 3- unmute")
     , ((0,               0x1008ff12), spawn "amixer -c 0 set Master toggle")
     , ((0,               0x1008ff13), spawn "amixer -c 0 set Master 3+ unmute")
-    -- toggle the status bar gap
-    -- TODO, update this binding with avoidStruts , ((modm , xK_b ), sendMessage ToggleStruts)
  
     -- Quit xmonad
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
  
     -- Restart xmonad
-    , ((modm              , xK_q     ), spawn "killall conky" >> spawn "xmonad --recompile; xmonad --restart")
+    , ((modm              , xK_q     ), spawn "startup -k" >> spawn "xmonad --recompile; xmonad --restart")
+ 
+    -- Restart to openbok
+    , ((modm .|. shiftMask, xK_o     ), spawn "startup -k" >> restart "/home/abijr/.scripts/obtoxmd" True)
     ]
     ++
  
@@ -218,7 +223,10 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = spacing 3 $ tiled |||  Full ||| TwoPane (3/100) (1/2) ||| simplestFloat  
+-- 
+
+ 
+myLayout = spacing 3 $ onWorkspace "gimp" gimp $ tiled |||  Full
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
@@ -231,6 +239,10 @@ myLayout = spacing 3 $ tiled |||  Full ||| TwoPane (3/100) (1/2) ||| simplestFlo
  
      -- Percent of screen to increment by when resizing panes
      delta   = 3/100
+ 
+     -- tiling algorithm for gimp
+     gimp = ThreeColMid 1 (1/100) (75/100)
+ 
  
 ------------------------------------------------------------------------
 -- Window rules:
@@ -247,17 +259,24 @@ myLayout = spacing 3 $ tiled |||  Full ||| TwoPane (3/100) (1/2) ||| simplestFlo
 -- To match on the WM_NAME, you can use 'title' in the same way that
 -- 'className' and 'resource' are used below.
 --
-
 myManageHook = composeAll .concat $
-    [ [className =? "MPlayer"        --> doFloat]
-    , [className =? "Gimp"           --> doFloat]
-    , [className =? "Gimp-2.6"           --> doFloat]
+    [ [className =? "MPlayer"            --> doFloat]
+    , [className =? "Gimp"               --> doF (W.shift "gimp")]
+    , [className =? "Gimp-2.6"           --> doF (W.shift "gimp")]
+    , [className =? "Gimp-2.6"           --> doF (W.shift "gimp")]
+	, [role =? "gimp-image-window"       --> doF (W.shiftMaster)]
+	, [role =? "gimp-toolbox"            --> doF (W.swapDown)]
+	, [role =? "gimp-dock"               --> doF (W.swapDown)]
+	, [isFullscreen                      --> doFullFloat] -- fullscreen flash and stuff
+    , [className =? "WINWORD.EXE"        --> doF (W.shift "docs")]
+    , [className =? "Gimp-2.7"           --> doFloat]
     , [fmap ("VLC" `isInfixOf`) title    --> doFloat]
-    , [resource  =? "desktop_window" --> doFloat]
-    , [resource  =? "conky" --> doIgnore]
-    , [resource  =? "kdesktop"       --> doIgnore] 
+    , [resource  =? "desktop_window"     --> doFloat]
+    , [resource  =? "conky"              --> doIgnore]
+    , [resource  =? "kdesktop"           --> doIgnore] 
 	]
  
+role = stringProperty "WM_WINDOW_ROLE" 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
@@ -309,8 +328,7 @@ myDzenPP = defaultPP
         (\x -> case x of
         "Spacing 3 Tall" -> "[ |:]"
         "Spacing 3 Full" -> "[ ]"
-        "Spacing 3 TwoPane" -> "[|]"
-        "Spacing 3 SimplestFloat" -> "[~]" 
+        "Spacing 3 ThreeCol" -> "~A~" 
         _ -> x
         )
     }
@@ -332,7 +350,7 @@ myDzenPP2 = defaultPP
 fadeMostInactives :: Rational -> X ()
 fadeMostInactives = fadeOutLogHook . fadeIf (isUnfocused <&&> noneOf qs)
   where noneOf = fmap not . foldr1 (<||>)
-        qs = [isFullscreen, fmap ("layer" `isInfixOf`) className, className =? "Cinelerra", className =? "Gimp",className =? "Gimp-2.6", className =? "WINWORD.EXE", className =? "Wine"]
+        qs = [isFullscreen, fmap ("layer" `isInfixOf`) className, className =? "Cinelerra", className =? "Gimp",className =? "Gimp-2.6", className =? "WINWORD.EXE", className =? "okular", className =? "Okular", className =? "Wine", className =? "Namoroka", className =? "Navigator"]
 
 
 -- Log Hook
@@ -368,15 +386,12 @@ myEventHook e = do
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
+		replace
 		xmproc <- spawnPipe "dzen2 -e '' -x '0' -y '780' -h '20' -w '350' -ta l -fg '#aaaaaa' -bg '#1a1c21' -fn -*-terminus-medium-*-*-*-19-*-*-*-*-*-*-*"
 		second <- spawnPipe "dzen2 -e '' -x '0' -y '760' -h '20' -w '350' -ta l -fg '#aaaaaa' -bg '#1a1c21' -fn -*-terminus-medium-*-*-*-18-*-*-*-*-*-*-*"
-		spawnPipe "xcompmgr"
-		spawnPipe "conky -c ~/.conky/conky_clock"
-		spawnPipe "conky -c ~/.conky/conky_status"
-		spawnPipe "conky -c ~/.conky/conky_mpd"
-		spawnPipe "conky -c ~/.conky/conky_cal"
-		spawnPipe "conky -c ~/.conky/conky_todo"
-		spawnPipe "setbg"  -- Sets the background
+		-- Small script to start or kill conky, awn, and cairo compmgr.
+		spawnPipe "startup -s"
+		spawnPipe "avant-window-navigator"
 		xmonad $ defaultConfig
 			{
  
