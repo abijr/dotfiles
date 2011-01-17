@@ -2,12 +2,12 @@
 # Author: abijr
 #############################
 
-alias ls='ls --color=auto --group-directories-first'
+alias ls='ls --color=auto --group-directories-first -p'
 alias ll='ls --color | less'
 alias ..='cd ..'
 alias :q='exit'
 alias xterm='xterm -vb'
-alias todo='gvim ~/todo'
+alias todo='gvi ~/todo'
  
 # Git stuff 
 alias gita='git add'
@@ -17,7 +17,6 @@ alias gitc='git commit -m'
 # Tell firefox to ignore gtk theme
 alias open='xdg-open'
 
- 
 _isroot=false
 [ $UID -eq 0 ] && _isroot=true
 
