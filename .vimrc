@@ -30,6 +30,7 @@ map! <C-F> <Esc>gUiw`]a
 
 " Set encoding to UTF-8
 set encoding=utf-8
+ 
 " Set wildmenu
 set wildmenu 
 
@@ -44,33 +45,23 @@ set sw=4
 set title
 let &titlestring = $CLEARCASE_ROOT
  
-"==================================================
-" GVIM stuff
-"==================================================
+"Remove menu in gvim
+set guioptions=ate 
  
-set guioptions+=LlRrb
-set guioptions-=LlRrb
-set guioptions-=T
- 
-"==================================================
- 
- 
-"==================================================
 "PERL STUFF
-"==================================================
- 
 " my perl includes pod
 let perl_include_pod = 1
+ 
 " syntax color complex things like @{${"foo"}}
 let perl_extended_vars = 1
 
 let perl_fold=1
 let perl_fold_blocks=1
 
-"==================================================
+"=========================================
   
-" Set folding to syntax
-"set fdm=syntax
+"Set folding to syntax
+	"set fdm=syntax
  
 " sane movement with wrap turned on
 nnoremap j gj
@@ -98,8 +89,8 @@ nmap <C-o> o <Esc>
  
 " Mappings to go to next error in the code
 " [c & cpp plugin]
-map  <silent> <F7>    <Esc>:cp<CR>
-map  <silent> <F8>    <Esc>:cn<CR>
+"map  <silent> <F7>    <Esc>:cp<CR>
+"map  <silent> <F8>    <Esc>:cn<CR>
 
 " Mapping to toggle the taglist window
 nnoremap <silent> <F10> :TlistToggle<CR>
@@ -109,8 +100,8 @@ nnoremap <silent> <F8> :NERDTreeToggle<CR>
  
 " These are mappings to copy and paste
 " to clipboard with F5 and F6
-vmap <silent> <F5> :!xclip -f -sel clip<CR>
-map <silent> <F6> :-1r !xclip -o -sel clip<CR>
+vmap <silent> <F6> :!xclip -f -sel clip<CR>
+map <silent> <F7> :-1r !xclip -o -sel clip<CR>
 
 " get rid of the highlight results fast
 map <M-/> :nohl<CR>
@@ -140,7 +131,10 @@ let g:Tex_ViewRule_pdf = "okular"
  
 " Settings for C/C++ 
 let g:C_OutputGvim = "xterm"
-let g:C_XtermDefaults = "-fn Monospace -fs 10"
+let g:C_XtermDefaults = "-geometry 70x42-20+40 -fn Monospace -fs 10"
  
+" SWANK setup
+let g:slimv_swank_cmd = "! xterm -e sbcl --load ~/.vim/slime/start-swank.lisp &"
+
 "Be able to increment with C-A alphanumeric values
 set nrformats=alpha
